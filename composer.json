@@ -1,0 +1,22 @@
+{
+    "name": "jamespjz/laravel-kong",
+    "description": "laravel5.5整合kong网关的一个应用插件",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jamespi",
+            "email": "jianzhongpi@163.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+		"php":">=7.0",
+		"laravel/laravel":">=5.5"
+	},
+	"autoload": {
+        "psr-4": {
+            "Kong\\Library": "src/Kong/Library"
+        }
+    }
+}
