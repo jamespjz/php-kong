@@ -3,7 +3,7 @@
  * test
  */
 
-namespace Kong\Library;
+namespace Jamespi\Kong\Kong\Library;
 
 class Loader{
     public function index(){

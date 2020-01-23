@@ -1,5 +1,5 @@
 {
-    "name": "jamespjz/laravel-kong",
+    "name": "jamespi/laravel-kong",
     "description": "laravel5.5整合kong网关的一个应用插件",
     "type": "library",
     "license": "MIT",
@@ -15,7 +15,7 @@
 	},
 	"autoload": {
         "psr-4": {
-            "Kong\\Library\\": "src/Kong/Library/"
+            "Jamespi\\Kong\\": "src/"
         }
     }
 }
