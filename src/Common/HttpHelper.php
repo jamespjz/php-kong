@@ -15,7 +15,7 @@ class HttpHelper {
      * @param string $apiStr 请求路径
      * @return string
      */
-    public function post($baseUri, $body, $apiStr):string
+    public function post(string $baseUri, array $body, string $apiStr):string
     {
         $client = new HttpClient( ['base_uri' => $baseUri] );
         $res = $client->request('POST', $apiStr, ['json' => $body ]);
@@ -30,7 +30,7 @@ class HttpHelper {
      * @param string $apiStr 请求路径
      * @return string
      */
-    public function get($baseUri, $apiStr):string
+    public function get(string $baseUri, string $apiStr):string
     {
         $client = new HttpClient( ['base_uri' => $baseUri] );
         $res = $client->request('GET', $apiStr);

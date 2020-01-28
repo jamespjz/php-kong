@@ -6,38 +6,50 @@
 namespace Jamespi\Kong\Controllers;
 
 use Jamespi\Kong\Common\HttpHelper;
+use Jamespi\Kong\Common\CheckHelper;
 class IndexController{
 
-    public function addService(){
-        $http = new HttpHelper();
-        $baseUri = 'http://47.112.160.146:8001';
-        $body = [
-            'name' => 'james_service',
-            'url' => 'http://music.taihe.com'
-        ];
-        $apiStr = '/services/';
-        $http->post($baseUri, $body, $apiStr);
+    protected $baseUri;
+
+    public function __construct(string $baseUri)
+    {
+        $port = '8001';
+        $this->baseUri = $baseUri;
+        $check = new CheckHelper();
+        $uriArr = explode(":", $baseUri);
+        if ($uriArr[1]) {
+            $port = $uriArr[1];
+        }
+        if(!$check->ping($uriArr[0], $port)){
+            return 'this ip port address failed to connect.';
+        }
     }
 
-    public function getServices($baseUri, $apiStr){
+    public function addService(array $body, string $apiStr)
+    {
         $http = new HttpHelper();
-        return $http->get($baseUri, $apiStr);
+        $http->post($this->baseUri, $body, $apiStr);
     }
 
-    public function addApi(){
+    public function getServices(string $apiStr)
+    {
+        $http = new HttpHelper();
+        return $http->get($this->baseUri, $apiStr);
+    }
+
+    public function addApi()
+    {
         return "aaa";
     }
 
-    public function addRoutes(){
+    public function addRoutes()
+    {
 
     }
 
-    public function addPlugins(){
+    public function addPlugins()
+    {
 
-    }
-
-    public static function testaa(){
-        return "bb";
     }
 
 }
