@@ -17,10 +17,13 @@ class IndexController{
         $this->baseUri = $baseUri;
         $check = new CheckHelper();
         $uriArr = explode(":", $baseUri);
-        if ($uriArr[1]) {
-            $port = $uriArr[1];
+        $uri = (reset($uriArr)=='http' || reset($uriArr)=='https') ? $uriArr[1] : $uriArr[0];
+
+        if (is_numeric(end($uriArr))) {
+            $port = end($uriArr);
         }
-        if(!$check->ping($uriArr[0], $port)){
+
+        if(!$check->ping($uri, $port)){
             return 'this ip port address failed to connect.';
         }
     }
