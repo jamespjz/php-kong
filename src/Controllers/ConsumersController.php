@@ -42,7 +42,7 @@ class ConsumersController{
      * @param string $serviceName 服务名称/ID
      * @return string
      */
-    public function addRoute(array $body, string $serviceName):string
+    public function addConsumers(array $body, string $serviceName):string
     {
         if ($serviceName) {
             $apiStr = '/services/'.$serviceName;

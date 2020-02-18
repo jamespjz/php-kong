@@ -1,6 +1,6 @@
 <?php
 /**
- * 接口相关操作类
+ * 接口相关操作类 - （kong在0.14.x之前版本适用）
  * @package Jamespi\Kong\Controllers
  * @author ZT PHP DEV TEAM PIJIANZHONG(jianzhongpi@163.com)
  * @create 2020年1月30日 下午1:50
@@ -48,59 +48,56 @@ class ApiController{
     }
 
     /**
-     * 查询所有服务信息
+     * 获取特定接口信息
+     * @param string $apiName 接口名称/ID
      * @return string
      */
-    public function getServices():string
+    public function getApi(string $apiName):string
     {
+        if ($apiName){
+            //服务相关路由
+            $apiStr = "/apis/".trim($apiName, "/");
+        }else{
+            $apiStr = "/apis";
+        }
+
         $http = new HttpHelper();
-        return $http->get($this->baseUri, $apiStr='/services');
+        return $http->get($this->baseUri, $apiStr);
     }
 
     /**
-     * 获取特定服务信息
-     * @param string $serviceName 请求路径
-     * @return string
-     */
-    public function getService(string $serviceName):string
-    {
-        $http = new HttpHelper();
-        return $http->get($this->baseUri, "/services/".trim($serviceName, "/"));
-    }
-
-    /**
-     * 更新指定服务
+     * 更新指定接口
      * @param array $body 更新实体数据
-     * @param string $serviceName 请求路径
+     * @param string $apiName 接口名称/ID
      * @return string
      */
-    public function editService(array $body, string $serviceName):string
+    public function editApi(array $body, string $apiName):string
     {
         $http = new HttpHelper();
-        return $http->path($this->baseUri, $body, "/services/".trim($serviceName,"/"));
+        return $http->path($this->baseUri, $body, "/apis/".trim($apiName,"/"));
     }
 
     /**
      * 新增/更新指定服务
-     * @param array $body
-     * @param string $serviceName
+     * @param array $body 新增/更新实体数据
+     * @param string $apiName 接口名称/ID
      * @return string
      */
-    public function addEditService(array $body, string $serviceName)
+    public function addEditApi(array $body, string $apiName)
     {
         $http = new HttpHelper();
-        return $http->put($this->baseUri, $body, "/services/".trim($serviceName,"/"));
+        return $http->put($this->baseUri, $body, "/apis/".trim($apiName,"/"));
     }
 
     /**
      * 删除指定服务
-     * @param string $serviceName
+     * @param string $apiName 接口名称/ID
      * @return string
      */
-    public function deleteService(string $serviceName):string
+    public function deleteApi(string $apiName):string
     {
         $http = new HttpHelper();
-        return $http->delete($this->baseUri, "/services/".trim($serviceName,"/"));
+        return $http->delete($this->baseUri, "/apis/".trim($apiName,"/"));
     }
 
 }

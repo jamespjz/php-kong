@@ -44,11 +44,11 @@ class RouteController{
      */
     public function addRoute(array $body, string $serviceName):string
     {
+        $apiStr = '';
         if ($serviceName) {
-            $apiStr = '/services/'.$serviceName;
-        }else{
-            $apiStr = '/routes';
+            $apiStr .= '/services/'.$serviceName;
         }
+        $apiStr .= '/routes';
         $http = new HttpHelper();
         return $http->post($this->baseUri, $body, $apiStr);
     }
